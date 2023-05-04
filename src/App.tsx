@@ -24,75 +24,88 @@ function App() {
   return (
     <>
       <h1>Wordle Solver</h1>
-      <div className="card">
+      <div className="container">
         <h2>Placed letters</h2>
-        {placed.map((letter, idx) => {
-          return (
-            <input
-              onChange={(evt) => {
-                const { value } = evt.currentTarget;
-                const newGood = [...placed];
-                newGood[idx] = `${value}`.toLowerCase();
-                setPlaced(newGood);
-                if (value.length === 1) {
-                  inputs.current[idx + 1]?.focus();
-                }
-              }}
-              className="letter good"
-              value={letter}
-              key={idx}
-              maxLength={1}
-              ref={(el) => {
-                if (el) {
-                  inputs.current[idx] = el;
-                }
-              }}
-            ></input>
-          );
-        })}
-      </div>
-      <div className="card">
+        <div className="horizontal">
+          {placed.map((letter, idx) => {
+            return (
+              <input
+                onChange={(evt) => {
+                  const { value } = evt.currentTarget;
+                  const newGood = [...placed];
+                  newGood[idx] = `${value}`.toLowerCase();
+                  setPlaced(newGood);
+                  if (value.length === 1) {
+                    inputs.current[idx + 1]?.focus();
+                  } else {
+                    inputs.current[idx - 1]?.focus();
+                  }
+                }}
+                className="letter good"
+                value={letter}
+                key={idx}
+                maxLength={1}
+                ref={(el) => {
+                  if (el) {
+                    inputs.current[idx] = el;
+                  }
+                }}
+                onKeyUp={(evt) => {
+                  const { key } = evt;
+                  if (key === "Backspace" && letter === "") {
+                    inputs.current[idx - 1]?.focus();
+                  }
+                }}
+              ></input>
+            );
+          })}
+        </div>
         <h2>Misplaced letters</h2>
-        {misplaced.map((letter, idx) => {
-          return (
-            <input
-              onChange={(evt) => {
-                const { value } = evt.currentTarget;
-                const newMisplaced = [...misplaced];
-                newMisplaced[idx] = `${value}`.toLowerCase();
-                setMisplaced(newMisplaced);
-                if (value.length === 1 && idx < 4) {
-                  inputs.current[idx + 6]?.focus();
-                }
-              }}
-              className="letter misplaced"
-              value={letter}
-              key={idx}
-              maxLength={1}
-              ref={(el) => {
-                if (el) {
-                  inputs.current[idx + 5] = el;
-                }
-              }}
-            ></input>
-          );
-        })}
-      </div>
-      <div className="card">
+        <div className="horizontal">
+          {misplaced.map((letter, idx) => {
+            return (
+              <input
+                onChange={(evt) => {
+                  const { value } = evt.currentTarget;
+                  const newMisplaced = [...misplaced];
+                  newMisplaced[idx] = `${value}`.toLowerCase();
+                  setMisplaced(newMisplaced);
+                  if (value.length === 1) {
+                    inputs.current[Math.min(idx + 6, 9)]?.focus();
+                  } else {
+                    inputs.current[idx + 4]?.focus();
+                  }
+                }}
+                className="letter misplaced"
+                value={letter}
+                key={idx}
+                maxLength={1}
+                ref={(el) => {
+                  if (el) {
+                    inputs.current[idx + 5] = el;
+                  }
+                }}
+                onKeyUp={(evt) => {
+                  const { key } = evt;
+                  if (key === "Backspace" && letter === "") {
+                    inputs.current[idx + 4]?.focus();
+                  }
+                }}
+              ></input>
+            );
+          })}
+        </div>
+        <div>{JSON.stringify(misplaced)}</div>
         <h2>Bad letters</h2>
-        <input
-          className="letter bad"
-          value={bad}
-          onChange={(e) => setBad(`${e.currentTarget.value}`.toLowerCase())}
-        />
-      </div>
-      <div className="card">
-        <h2>Possible solutions</h2>
-      </div>
-      <div>
+        <div className="horizontal">
+          <input
+            className="letter bad"
+            value={bad}
+            onChange={(e) => setBad(`${e.currentTarget.value}`.toLowerCase())}
+          />
+        </div>
+
         <PossibleSolutions placed={placed} misplaced={misplaced} bad={bad} />
-      </div>
-      <div>
         <button className="clearButton" onClick={clear}>
           Clear
         </button>
@@ -145,9 +158,12 @@ function PossibleSolutions({
   });
 
   return (
-    <div className="text-large">
-      <ShowSolutions solutions={possibleSolutions} />
-    </div>
+    <>
+      <h2>Possible solutions</h2>
+      <div className="text-large">
+        <ShowSolutions solutions={possibleSolutions} />
+      </div>
+    </>
   );
 }
 
