@@ -32,7 +32,7 @@ function App() {
               onChange={(evt) => {
                 const { value } = evt.currentTarget;
                 const newGood = [...placed];
-                newGood[idx] = value;
+                newGood[idx] = `${value}`.toLowerCase();
                 setPlaced(newGood);
                 if (value.length === 1) {
                   inputs.current[idx + 1]?.focus();
@@ -59,7 +59,7 @@ function App() {
               onChange={(evt) => {
                 const { value } = evt.currentTarget;
                 const newMisplaced = [...misplaced];
-                newMisplaced[idx] = value;
+                newMisplaced[idx] = `${value}`.toLowerCase();
                 setMisplaced(newMisplaced);
                 if (value.length === 1 && idx < 4) {
                   inputs.current[idx + 6]?.focus();
@@ -83,7 +83,7 @@ function App() {
         <input
           className="letter bad"
           value={bad}
-          onChange={(e) => setBad(e.currentTarget.value)}
+          onChange={(e) => setBad(`${e.currentTarget.value}`.toLowerCase())}
         />
       </div>
       <div className="card">
