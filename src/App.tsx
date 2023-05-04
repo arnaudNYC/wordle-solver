@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import "./App.css";
 import words from "an-array-of-english-words";
 
@@ -8,6 +8,12 @@ function App() {
   const [placed, setPlaced] = useState<string[]>(["", "", "", "", ""]);
   const [misplaced, setMisplaced] = useState<string[]>(["", "", "", "", ""]);
   const [bad, setBad] = useState<string>("");
+
+  const inputs = useRef<HTMLInputElement[]>([]);
+
+  useEffect(() => {
+    inputs.current[0]?.focus();
+  }, []);
 
   const clear = () => {
     setPlaced(["", "", "", "", ""]);
@@ -24,14 +30,23 @@ function App() {
           return (
             <input
               onChange={(evt) => {
+                const { value } = evt.currentTarget;
                 const newGood = [...placed];
-                newGood[idx] = evt.currentTarget.value;
+                newGood[idx] = value;
                 setPlaced(newGood);
+                if (value.length === 1) {
+                  inputs.current[idx + 1]?.focus();
+                }
               }}
               className="letter good"
               value={letter}
               key={idx}
               maxLength={1}
+              ref={(el) => {
+                if (el) {
+                  inputs.current[idx] = el;
+                }
+              }}
             ></input>
           );
         })}
@@ -42,14 +57,23 @@ function App() {
           return (
             <input
               onChange={(evt) => {
+                const { value } = evt.currentTarget;
                 const newMisplaced = [...misplaced];
-                newMisplaced[idx] = evt.currentTarget.value;
+                newMisplaced[idx] = value;
                 setMisplaced(newMisplaced);
+                if (value.length === 1 && idx < 4) {
+                  inputs.current[idx + 6]?.focus();
+                }
               }}
               className="letter misplaced"
               value={letter}
               key={idx}
               maxLength={1}
+              ref={(el) => {
+                if (el) {
+                  inputs.current[idx + 5] = el;
+                }
+              }}
             ></input>
           );
         })}
@@ -108,6 +132,7 @@ function PossibleSolutions({
     // reject the word if it contains any of the bad letters
     for (let i = 0; i < bad.length; i++) {
       if (bad[i] && wordLetters.includes(bad[i])) {
+        // account for duplicate letters
         for (let j = 0; j < wordLetters.length; j++) {
           if (wordLetters[j] === bad[i] && placed[j] !== bad[i]) {
             return false;
@@ -115,7 +140,7 @@ function PossibleSolutions({
         }
       }
     }
-    //
+    // could be a solution
     return true;
   });
 
