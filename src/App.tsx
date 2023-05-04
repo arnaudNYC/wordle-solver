@@ -103,17 +103,14 @@ function App() {
             onChange={(e) => setBad(`${e.currentTarget.value}`.toLowerCase())}
           />
         </div>
-
         <PossibleSolutions placed={placed} misplaced={misplaced} bad={bad} />
         <button className="clearButton" onClick={clear}>
           Clear
         </button>
       </div>
-      <div className="footer">
-        <div>
-          {"Made with ❤️ in 🗽 - "}
-          <a href="https://github.com/arnaudNYC/wordle-solver">github</a>
-        </div>
+      <div>
+        {"Made with ❤️ in 🗽 - "}
+        <a href="https://github.com/arnaudNYC/wordle-solver">github</a>
       </div>
     </>
   );
