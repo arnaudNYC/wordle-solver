@@ -95,7 +95,6 @@ function App() {
             );
           })}
         </div>
-        <div>{JSON.stringify(misplaced)}</div>
         <h2>Bad letters</h2>
         <div className="horizontal">
           <input
