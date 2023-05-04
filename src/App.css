@@ -42,12 +42,13 @@
   color: #fff;
   will-change: transform;
   transition: transform 300ms;
-  width: 1.75em;
-  height: 1.75em;
-  margin: 4px;
+  width: 2em;
+  height: 2em;
+  margin: 1px;
   text-align: center;
   text-transform: uppercase;
   text-shadow: 1px 1px 2px black;
+  border-radius: 5px;
 }
 
 .good {
@@ -77,4 +78,13 @@
 
 .text-large {
   font-size: 1.5em;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
 }

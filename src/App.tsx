@@ -109,6 +109,12 @@ function App() {
           Clear
         </button>
       </div>
+      <div className="footer">
+        <div>
+          {"Made with ❤️ in 🗽 - "}
+          <a href="https://github.com/arnaudNYC/wordle-solver">github</a>
+        </div>
+      </div>
     </>
   );
 }

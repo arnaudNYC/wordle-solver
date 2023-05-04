@@ -22,3 +22,16 @@ body {
 ::-webkit-scrollbar {
   -webkit-appearance: none;
 }
+
+a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+a:visited {
+  color: inherit;
+}
+
+a:hover {
+  text-decoration: none;
+}
