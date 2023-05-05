@@ -6,7 +6,6 @@ specifiers:
   '@typescript-eslint/eslint-plugin': ^5.57.1
   '@typescript-eslint/parser': ^5.57.1
   '@vitejs/plugin-react-swc': ^3.0.0
-  an-array-of-english-words: ^2.0.0
   eslint: ^8.38.0
   eslint-plugin-react-hooks: ^4.6.0
   eslint-plugin-react-refresh: ^0.3.4
@@ -16,7 +15,6 @@ specifiers:
   vite: ^4.3.2
 
 dependencies:
-  an-array-of-english-words: 2.0.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
 
@@ -615,11 +613,6 @@ packages:
       json-schema-traverse: 0.4.1
       uri-js: 4.4.1
     dev: true
-
-  /an-array-of-english-words/2.0.0:
-    resolution: {integrity: sha512-FXnNvZSOI27kkKXeLSquhaTGP7z198UOQ4txaYO9fCfrjCh+D5SV7G7XqzEH0229+pAi4cjBEZ4WIQYgjKtO7Q==}
-    hasBin: true
-    dev: false
 
   /ansi-regex/5.0.1:
     resolution: {integrity: sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==}

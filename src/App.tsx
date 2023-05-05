@@ -1,8 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 import "./App.css";
-import words from "an-array-of-english-words";
-
-const fiveLetterWords = words.filter((word) => word.length === 5);
+import words from "./words";
 
 function App() {
   const [placed, setPlaced] = useState<string[]>(["", "", "", "", ""]);
@@ -125,8 +123,7 @@ function PossibleSolutions({
   misplaced: string[];
   bad: string;
 }) {
-  let possibleSolutions: string[] = [];
-  possibleSolutions = fiveLetterWords.filter((word) => {
+  const possibleSolutions = words.filter((word) => {
     // remove words that don't match the placed letters
     const wordLetters = word.split("");
     for (let i = 0; i < placed.length; i++) {
